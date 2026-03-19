@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JK Poultries — Premium Farm Fresh Eggs</title>
+  <meta name="description" content="Premium pasture-raised eggs from JK Poultries. Free-range hens, golden yolks, delivered fresh."/>
+
+  <!-- Google Fonts: Playfair Display + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet"/>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE LOADER
+============================================================ -->
+<div id="loader">
+  <div class="loader-content">
+    <div class="loader-egg-anim">
+      <svg viewBox="0 0 120 150" class="loader-egg-svg">
+        <defs>
+          <radialGradient id="lg1" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#FFFBEB"/>
+            <stop offset="55%"  stop-color="#FDE68A"/>
+            <stop offset="100%" stop-color="#CA8A04"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="60" cy="85" rx="46" ry="60" fill="url(#lg1)"/>
+        <ellipse cx="45" cy="62" rx="12" ry="8" fill="rgba(255,255,255,0.35)" transform="rotate(-20 45 62)"/>
+      </svg>
+    </div>
+    <p class="loader-label">JK Poultries</p>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CUSTOM CURSOR
+============================================================ -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#hero" class="brand">
+      <img src="logo.png" alt="JK Poultries Logo" style="width:48px; height:48px; border-radius:50%; object-fit:cover;"/>
+      <span>JK <strong>Poultries</strong></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Our Farm</a></li>
+      <li><a href="#eggs">Eggs</a></li>
+      <li><a href="#quality">Quality</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#enquire" class="nav-order-btn">Enquire Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#about"   class="mob-link">Our Farm</a></li>
+    <li><a href="#eggs"    class="mob-link">Eggs</a></li>
+    <li><a href="#quality" class="mob-link">Quality</a></li>
+    <li><a href="#process" class="mob-link">Process</a></li>
+    <li><a href="#reviews" class="mob-link">Reviews</a></li>
+    <li><a href="#enquire"   class="mob-link">Enquire Now</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section id="hero">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+  <div class="hero-noise"></div>
+
+  <!-- THE ANIMATED EGG — GSAP timeline target -->
+  <div class="hero-egg-stage" id="heroEggStage">
+    <svg id="heroEgg" class="hero-egg-svg" viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="eggBody" cx="38%" cy="30%" r="68%">
+          <stop offset="0%"   stop-color="#FFFDE7"/>
+          <stop offset="45%"  stop-color="#FDE68A"/>
+          <stop offset="85%"  stop-color="#F59E0B"/>
+          <stop offset="100%" stop-color="#B45309"/>
+        </radialGradient>
+        <radialGradient id="eggShine" cx="30%" cy="22%" r="28%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0.75)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="eggShadowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="rgba(0,0,0,0.25)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+        </radialGradient>
+      </defs>
+      <!-- Drop shadow -->
+      <ellipse id="eggShadow" cx="120" cy="288" rx="65" ry="10" fill="url(#eggShadowGrad)"/>
+      <!-- Egg body -->
+      <ellipse cx="120" cy="162" rx="88" ry="118" fill="url(#eggBody)"/>
+      <!-- Specular shine -->
+      <ellipse cx="120" cy="162" rx="88" ry="118" fill="url(#eggShine)"/>
+      <!-- Crack lines (opacity 0 by default, GSAP reveals) -->
+      <g id="crackLines" opacity="0">
+        <path d="M112 80 L105 102 L118 98 L108 126" stroke="#92400E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M130 86 L138 108 L125 112 L133 136" stroke="#92400E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M118 98 L124 106 L116 110" stroke="#92400E" stroke-width="1" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Hero text content (all hidden initially, GSAP animates in) -->
+  <div class="hero-text" id="heroText">
+    <span class="hero-eyebrow" id="heroEyebrow">Est. 1998 · Family Owned · Andhra Pradesh</span>
+    <h1 class="hero-title">
+      <span class="ht-line" id="htLine1">Nature's</span>
+      <span class="ht-line golden" id="htLine2">Golden Gift.</span>
+    </h1>
+    <p class="hero-desc" id="heroDesc">
+      Pasture-raised eggs from hens that roam freely under open skies.<br/>
+      Rich yolks. Clean protein. Delivered farm-fresh to your door.
+    </p>
+    <div class="hero-btns" id="heroBtns">
+      <a href="#eggs"    class="btn-primary">Explore Our Eggs</a>
+      <a href="#enquire" class="btn-outline">Enquire Now</a>
+    </div>
+  </div>
+
+  <!-- Floating trust badges -->
+  <div class="hero-badges" id="heroBadges">
+    <div class="h-badge"><span class="hb-icon">🌿</span><span>100% Free Range</span></div>
+    <div class="h-badge"><span class="hb-icon">🐔</span><span>5,000+ Happy Hens</span></div>
+    <div class="h-badge"><span class="hb-icon">🚚</span><span>Same-Day Delivery</span></div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-cue" id="scrollCue">
+    <span class="sc-text">Discover</span>
+    <div class="sc-line"><div class="sc-dot"></div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARQUEE BAND
+============================================================ -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>🥚 Farm Fresh Eggs</span>
+    <span>🌾 Natural Feed</span>
+    <span>☀️ Pasture Raised</span>
+    <span>🐓 Free Range</span>
+    <span>💛 Golden Yolk Guaranteed</span>
+    <span>📦 Daily Harvest</span>
+    <span>🥚 Farm Fresh Eggs</span>
+    <span>🌾 Natural Feed</span>
+    <span>☀️ Pasture Raised</span>
+    <span>🐓 Free Range</span>
+    <span>💛 Golden Yolk Guaranteed</span>
+    <span>📦 Daily Harvest</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     ABOUT THE FARM
+============================================================ -->
+<section id="about">
+  <div class="about-layout">
+    <!-- Parallax image panel -->
+    <div class="about-visual" id="aboutVisual">
+      <div class="about-img-wrap" id="aboutImgWrap">
+        <!-- SVG farm scene illustration -->
+        <svg class="farm-scene" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sky -->
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FEF3C7"/>
+              <stop offset="100%" stop-color="#FDE68A"/>
+            </linearGradient>
+            <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#84CC16"/>
+              <stop offset="100%" stop-color="#4D7C0F"/>
+            </linearGradient>
+          </defs>
+          <rect width="700" height="560" fill="url(#sky)"/>
+          <!-- Sun -->
+          <circle cx="590" cy="80" r="55" fill="#FBBF24" opacity="0.7"/>
+          <circle cx="590" cy="80" r="40" fill="#FCD34D"/>
+          <!-- Clouds -->
+          <ellipse cx="150" cy="100" rx="70" ry="28" fill="white" opacity="0.8"/>
+          <ellipse cx="200" cy="90" rx="50" ry="24" fill="white" opacity="0.8"/>
+          <ellipse cx="450" cy="130" rx="60" ry="22" fill="white" opacity="0.7"/>
+          <!-- Rolling hills -->
+          <ellipse cx="350" cy="420" rx="420" ry="180" fill="#65A30D"/>
+          <ellipse cx="0"   cy="500" rx="250" ry="130" fill="#4D7C0F"/>
+          <ellipse cx="700" cy="490" rx="220" ry="120" fill="#4D7C0F"/>
+          <!-- Ground -->
+          <rect y="390" width="700" height="170" fill="url(#ground)"/>
+          <!-- Barn -->
+          <rect x="260" y="240" width="180" height="150" fill="#B45309"/>
+          <rect x="255" y="240" width="190" height="20"  fill="#92400E"/>
+          <polygon points="260,240 350,160 440,240" fill="#DC2626"/>
+          <polygon points="340,240 350,195 360,240" fill="#B91C1C"/>
+          <!-- Barn door -->
+          <rect x="310" y="320" width="80" height="70" fill="#78350F" rx="4"/>
+          <rect x="348" y="320" width="4"  height="70" fill="#92400E"/>
+          <circle cx="342" cy="358" r="4" fill="#FCD34D"/>
+          <!-- Barn windows -->
+          <rect x="270" y="260" width="40" height="35" fill="#FDE68A" rx="3"/>
+          <rect x="390" y="260" width="40" height="35" fill="#FDE68A" rx="3"/>
+          <!-- Fence -->
+          <g stroke="#92400E" stroke-width="3" fill="none">
+            <line x1="50"  y1="390" x2="50"  y2="450"/>
+            <line x1="110" y1="385" x2="110" y2="445"/>
+            <line x1="170" y1="383" x2="170" y2="443"/>
+            <line x1="50"  y1="415" x2="200" y2="415"/>
+            <line x1="50"  y1="435" x2="200" y2="435"/>
+          </g>
+          <g stroke="#92400E" stroke-width="3" fill="none">
+            <line x1="500" y1="385" x2="500" y2="445"/>
+            <line x1="560" y1="383" x2="560" y2="443"/>
+            <line x1="620" y1="387" x2="620" y2="447"/>
+            <line x1="490" y1="410" x2="640" y2="410"/>
+            <line x1="490" y1="430" x2="640" y2="430"/>
+          </g>
+          <!-- Chickens -->
+          <g transform="translate(130,360)">
+            <ellipse cx="0" cy="0" rx="18" ry="13" fill="#FEF3C7"/>
+            <circle cx="15" cy="-10" r="10" fill="#FEF3C7"/>
+            <polygon points="22,-10 28,-6 22,-6" fill="#F59E0B"/>
+            <polygon points="15,-20 13,-14 17,-14" fill="#DC2626"/>
+          </g>
+          <g transform="translate(520,370)">
+            <ellipse cx="0" cy="0" rx="16" ry="11" fill="#FDE68A"/>
+            <circle cx="13" cy="-9" r="9"  fill="#FDE68A"/>
+            <polygon points="20,-9 25,-5 20,-5" fill="#F59E0B"/>
+            <polygon points="13,-18 11,-13 15,-13" fill="#DC2626"/>
+          </g>
+          <!-- Trees -->
+          <g transform="translate(80, 280)">
+            <rect x="-6" y="60" width="12" height="50" fill="#78350F"/>
+            <circle cx="0" cy="40" r="38" fill="#16A34A"/>
+            <circle cx="-18" cy="52" r="24" fill="#15803D"/>
+            <circle cx="18"  cy="50" r="26" fill="#15803D"/>
+          </g>
+          <g transform="translate(600, 270)">
+            <rect x="-6" y="60" width="12" height="50" fill="#78350F"/>
+            <circle cx="0" cy="40" r="34" fill="#16A34A"/>
+            <circle cx="-16" cy="50" r="22" fill="#15803D"/>
+          </g>
+          <!-- Eggs on ground -->
+          <ellipse cx="200" cy="398" rx="10" ry="13" fill="#FDE68A" opacity="0.9"/>
+          <ellipse cx="470" cy="400" rx="9"  ry="12" fill="#FEF3C7" opacity="0.9"/>
+        </svg>
+        <div class="about-img-overlay"></div>
+      </div>
+      <div class="about-float-card">
+        <span class="afc-number">35+</span>
+        <span class="afc-label">Years of Farming Excellence</span>
+      </div>
+    </div>
+
+    <!-- Text content -->
+    <div class="about-copy" id="aboutCopy">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">A Farm Built on<br/><em>Passion &amp; Purpose</em></h2>
+      <p class="about-para">
+        JK Poultries was founded in 1998 by the Krishnamurthy family in the fertile plains of Andhra Pradesh. What began as a small backyard flock of 50 hens has grown into one of the region's most respected free-range egg farms.
+      </p>
+      <p class="about-para">
+        We believe that happy hens lay better eggs. Our birds roam on 40 acres of lush pasture, eating a natural diet of grasses, insects, and supplementary grain — never antibiotics, never artificial hormones.
+      </p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <span class="pillar-icon">🌿</span>
+          <div>
+            <strong>No Hormones</strong>
+            <p>100% natural rearing, always</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🌾</span>
+          <div>
+            <strong>Organic Feed</strong>
+            <p>Non-GMO grains &amp; fresh pasture</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">♻️</span>
+          <div>
+            <strong>Sustainable</strong>
+            <p>Solar-powered, zero-waste packaging</p>
+          </div>
+        </div>
+      </div>
+      <a href="#enquire" class="btn-primary">Enquire About Our Eggs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OUR EGGS — PRODUCTS
+============================================================ -->
+<section id="eggs">
+  <div class="section-head" id="eggsHead">
+    <span class="section-tag">Our Products</span>
+    <h2 class="section-title">Choose Your <em>Perfect Egg</em></h2>
+    <p class="section-sub">Every variety raised with the same love. Graded, washed, and packed within hours of collection.</p>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+
+    <!-- Card 1 -->
+    <div class="product-card" data-index="0">
+      <div class="pc-visual">
+        <svg class="pc-egg-svg" viewBox="0 0 160 200">
+          <defs>
+            <radialGradient id="e1g" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#FFFDE7"/>
+              <stop offset="55%" stop-color="#FDE68A"/>
+              <stop offset="100%" stop-color="#B45309"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="80" cy="115" rx="58" ry="78" fill="url(#e1g)"/>
+          <ellipse cx="60" cy="88" rx="16" ry="10" fill="rgba(255,255,255,0.35)" transform="rotate(-20 60 88)"/>
+          <ellipse cx="80" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.1)"/>
+        </svg>
+        <div class="pc-badge">Best Seller</div>
+      </div>
+      <div class="pc-info">
+        <h3>Classic White</h3>
+        <p>Our signature free-range white eggs — rich golden yolk, firm white, perfect for everyday cooking.</p>
+        <div class="pc-meta">
+          <span class="pc-weight">Medium (53–63g)</span>
+          <span class="pc-price">₹72 <small>/dozen</small></span>
+        </div>
+        <a href="#enquire" class="pc-btn">Enquire Now</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card featured" data-index="1">
+      <div class="pc-visual">
+        <svg class="pc-egg-svg" viewBox="0 0 160 200">
+          <defs>
+            <radialGradient id="e2g" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#FFF7ED"/>
+              <stop offset="45%" stop-color="#FDBA74"/>
+              <stop offset="100%" stop-color="#7C2D12"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="80" cy="115" rx="58" ry="78" fill="url(#e2g)"/>
+          <ellipse cx="60" cy="88" rx="16" ry="10" fill="rgba(255,255,255,0.3)" transform="rotate(-20 60 88)"/>
+          <ellipse cx="80" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.12)"/>
+        </svg>
+        <div class="pc-badge premium">Premium</div>
+      </div>
+      <div class="pc-info">
+        <h3>Heritage Brown</h3>
+        <p>From our heritage-breed hens — deeper flavor, higher omega-3, and that stunning brown shell.</p>
+        <div class="pc-meta">
+          <span class="pc-weight">Large (63–73g)</span>
+          <span class="pc-price">₹96 <small>/dozen</small></span>
+        </div>
+        <a href="#enquire" class="pc-btn">Enquire Now</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card" data-index="2">
+      <div class="pc-visual">
+        <svg class="pc-egg-svg" viewBox="0 0 160 200">
+          <defs>
+            <radialGradient id="e3g" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ECFDF5"/>
+              <stop offset="50%" stop-color="#6EE7B7"/>
+              <stop offset="100%" stop-color="#065F46"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="80" cy="115" rx="55" ry="72" fill="url(#e3g)"/>
+          <ellipse cx="62" cy="90" rx="14" ry="9" fill="rgba(255,255,255,0.35)" transform="rotate(-20 62 90)"/>
+          <ellipse cx="80" cy="184" rx="38" ry="6" fill="rgba(0,0,0,0.1)"/>
+        </svg>
+        <div class="pc-badge organic">Organic</div>
+      </div>
+      <div class="pc-info">
+        <h3>Desi Country Egg</h3>
+        <p>Small-batch desi breed eggs. Intense flavor, harder shell, raised entirely on pasture.</p>
+        <div class="pc-meta">
+          <span class="pc-weight">Small (45–53g)</span>
+          <span class="pc-price">₹120 <small>/dozen</small></span>
+        </div>
+        <a href="#enquire" class="pc-btn">Enquire Now</a>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="product-card" data-index="3">
+      <div class="pc-visual">
+        <svg class="pc-egg-svg" viewBox="0 0 160 200">
+          <defs>
+            <radialGradient id="e4g" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#FDF4FF"/>
+              <stop offset="50%" stop-color="#E9D5FF"/>
+              <stop offset="100%" stop-color="#6B21A8"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="80" cy="115" rx="58" ry="78" fill="url(#e4g)"/>
+          <ellipse cx="58" cy="87" rx="15" ry="10" fill="rgba(255,255,255,0.3)" transform="rotate(-20 58 87)"/>
+          <ellipse cx="80" cy="188" rx="40" ry="7" fill="rgba(0,0,0,0.1)"/>
+        </svg>
+        <div class="pc-badge jumbo">Jumbo</div>
+      </div>
+      <div class="pc-info">
+        <h3>Jumbo Double Yolk</h3>
+        <p>Extra-large eggs — often double yolk. A baker's secret weapon for richer, fluffier results.</p>
+        <div class="pc-meta">
+          <span class="pc-weight">Jumbo (73g+)</span>
+          <span class="pc-price">₹144 <small>/dozen</small></span>
+        </div>
+        <a href="#enquire" class="pc-btn">Enquire Now</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     QUALITY & NUTRITION
+============================================================ -->
+<section id="quality">
+  <div class="quality-layout">
+    <!-- Cracking egg animation -->
+    <div class="quality-visual" id="qualityVisual">
+      <div class="cracking-egg-wrap" id="crackEggWrap">
+        <svg id="crackEgg" class="crack-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ceg" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#FFFDE7"/>
+              <stop offset="55%" stop-color="#FDE68A"/>
+              <stop offset="100%" stop-color="#B45309"/>
+            </radialGradient>
+            <radialGradient id="yolkGrad" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#FEF08A"/>
+              <stop offset="60%" stop-color="#EAB308"/>
+              <stop offset="100%" stop-color="#CA8A04"/>
+            </radialGradient>
+            <radialGradient id="whiteGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(255,253,235,0.95)"/>
+              <stop offset="100%" stop-color="rgba(254,243,199,0.7)"/>
+            </radialGradient>
+          </defs>
+          <!-- Egg white (hidden until cracked) -->
+          <ellipse id="eggWhite" cx="150" cy="280" rx="90" ry="55" fill="url(#whiteGrad)" opacity="0"/>
+          <!-- Yolk (hidden until cracked) -->
+          <circle id="eggYolk" cx="150" cy="272" r="40" fill="url(#yolkGrad)" opacity="0"/>
+          <circle id="yolkShine" cx="138" cy="260" r="12" fill="rgba(255,255,200,0.5)" opacity="0"/>
+          <!-- Egg top half -->
+          <path id="eggTop" d="M 62 170 Q 55 80 150 38 Q 245 80 238 170 Z" fill="url(#ceg)"/>
+          <!-- Egg bottom half -->
+          <path id="eggBottom" d="M 62 170 Q 60 280 150 320 Q 240 280 238 170 Z" fill="url(#ceg)"/>
+          <!-- Jagged crack line overlay -->
+          <path id="crackEdge" d="M 62 170 L 90 162 L 105 175 L 125 158 L 142 172 L 160 155 L 175 170 L 195 160 L 215 168 L 238 170" fill="none" stroke="#92400E" stroke-width="0" opacity="0"/>
+        </svg>
+        <p class="crack-cta" id="crackCTA">Scroll to crack open</p>
+      </div>
+    </div>
+
+    <!-- Nutrition facts panel -->
+    <div class="nutrition-panel" id="nutritionPanel">
+      <span class="section-tag">Quality &amp; Nutrition</span>
+      <h2 class="section-title">What's Inside<br/><em>Every Egg</em></h2>
+      <p class="section-sub-sm">Per 1 large egg (50g) — our pasture-raised eggs consistently beat USDA averages.</p>
+
+      <div class="nutrition-bars" id="nutritionBars">
+        <div class="n-bar-row">
+          <div class="n-label"><span>Protein</span><span class="n-val">6.4g</span></div>
+          <div class="n-track"><div class="n-fill" data-pct="82" style="background:#FBBF24"></div></div>
+        </div>
+        <div class="n-bar-row">
+          <div class="n-label"><span>Omega-3</span><span class="n-val">220mg</span></div>
+          <div class="n-track"><div class="n-fill" data-pct="68" style="background:#F59E0B"></div></div>
+        </div>
+        <div class="n-bar-row">
+          <div class="n-label"><span>Vitamin D</span><span class="n-val">44IU</span></div>
+          <div class="n-track"><div class="n-fill" data-pct="55" style="background:#84CC16"></div></div>
+        </div>
+        <div class="n-bar-row">
+          <div class="n-label"><span>Choline</span><span class="n-val">147mg</span></div>
+          <div class="n-track"><div class="n-fill" data-pct="74" style="background:#16A34A"></div></div>
+        </div>
+        <div class="n-bar-row">
+          <div class="n-label"><span>Vitamin B12</span><span class="n-val">0.6µg</span></div>
+          <div class="n-track"><div class="n-fill" data-pct="60" style="background:#F59E0B"></div></div>
+        </div>
+      </div>
+
+      <div class="quality-badges-row">
+        <div class="q-badge">✅ No Antibiotics</div>
+        <div class="q-badge">✅ No Hormones</div>
+        <div class="q-badge">✅ FSSAI Certified</div>
+        <div class="q-badge">✅ Cold Chain Packed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FARM PROCESS — ANIMATED TIMELINE
+============================================================ -->
+<section id="process">
+  <div class="section-head" id="processHead">
+    <span class="section-tag">Farm to Table</span>
+    <h2 class="section-title">Our <em>Journey</em></h2>
+    <p class="section-sub">From sunrise on the farm to your breakfast plate — every step handled with care.</p>
+  </div>
+
+  <div class="process-timeline" id="processTimeline">
+
+    <div class="process-line" id="processLine">
+      <div class="process-line-fill" id="processLineFill"></div>
+    </div>
+
+    <div class="process-step" data-step="0">
+      <div class="ps-icon-wrap">
+        <div class="ps-icon">🐓</div>
+      </div>
+      <div class="ps-content">
+        <h4>Pasture Life</h4>
+        <p>Our hens spend their days outdoors on open pasture — foraging insects, dust-bathing, and living stress-free. Happy hens lay the best eggs.</p>
+      </div>
+    </div>
+
+    <div class="process-step" data-step="1">
+      <div class="ps-icon-wrap">
+        <div class="ps-icon">🥚</div>
+      </div>
+      <div class="ps-content">
+        <h4>Daily Collection</h4>
+        <p>Eggs are hand-collected twice daily at dawn and dusk to ensure maximum freshness. Each nest box is checked and cleaned every morning.</p>
+      </div>
+    </div>
+
+    <div class="process-step" data-step="2">
+      <div class="ps-icon-wrap">
+        <div class="ps-icon">🔬</div>
+      </div>
+      <div class="ps-content">
+        <h4>Quality Grading</h4>
+        <p>Every egg is candled, washed with food-safe solution, and graded by weight and shell quality. Cracked or misshapen eggs never reach customers.</p>
+      </div>
+    </div>
+
+    <div class="process-step" data-step="3">
+      <div class="ps-icon-wrap">
+        <div class="ps-icon">📦</div>
+      </div>
+      <div class="ps-content">
+        <h4>Eco Packaging</h4>
+        <p>Packed in 100% recycled pulp trays printed with soy ink. We've eliminated all plastic from our supply chain since 2020.</p>
+      </div>
+    </div>
+
+    <div class="process-step" data-step="4">
+      <div class="ps-icon-wrap">
+        <div class="ps-icon">🚐</div>
+      </div>
+      <div class="ps-content">
+        <h4>Fresh Delivery</h4>
+        <p>Our refrigerated vans deliver directly to your door within 24 hours of collection. No middlemen. No cold storage delays.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CUSTOMER REVIEWS
+============================================================ -->
+<section id="reviews">
+  <div class="section-head" id="reviewsHead">
+    <span class="section-tag">Testimonials</span>
+    <h2 class="section-title">Loved by <em>Families</em><br/>Across Andhra</h2>
+  </div>
+
+  <div class="reviews-slider-wrap">
+    <div class="reviews-track" id="reviewsTrack">
+
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"The yolks are genuinely more orange than any supermarket egg I've ever bought. My kids can taste the difference and actually ask for eggs now!"</p>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background:#FDE68A">P</div>
+          <div>
+            <strong>Priya Sharma</strong>
+            <span>Vijayawada</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"I run a bakery and switched to JK Poultries 8 months ago. My cakes are fluffier, my custards richer. Never going back to battery eggs."</p>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background:#BBF7D0">R</div>
+          <div>
+            <strong>Ramesh Babu</strong>
+            <span>Guntur</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Delivery is always on time and the eggs arrive perfectly intact. The packaging is beautiful and eco-friendly — love that they care about the environment."</p>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background:#FECACA">S</div>
+          <div>
+            <strong>Sunita Reddy</strong>
+            <span>Hyderabad</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"As a fitness coach I recommend JK's pasture eggs to all my clients. The protein content and omega-3 profile is exceptional. Pure nutrition."</p>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background:#DDD6FE">A</div>
+          <div>
+            <strong>Arjun Naidu</strong>
+            <span>Vizag</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"My grandmother swears these taste exactly like the desi eggs from her village in the 1970s. That's the highest compliment in our family!"</p>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background:#FED7AA">L</div>
+          <div>
+            <strong>Lakshmi Devi</strong>
+            <span>Tirupati</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Slider controls -->
+    <div class="reviews-controls">
+      <button class="rc-prev" id="rcPrev" aria-label="Previous">←</button>
+      <div class="rc-dots" id="rcDots"></div>
+      <button class="rc-next" id="rcNext" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ENQUIRY / CONTACT SECTION
+============================================================ -->
+<section id="enquire">
+  <div class="order-layout">
+
+    <!-- Left: contact info -->
+    <div class="order-copy" id="orderCopy">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Have a <em>Question?</em><br/>We'd Love to Help</h2>
+      <p>Whether you want to know more about our eggs, farming practices, availability in your area, or anything else — just drop us a message and we'll get back to you promptly.</p>
+
+      <div class="order-perks">
+        <div class="perk"><span>🥚</span> Ask about any egg variety</div>
+        <div class="perk"><span>🌾</span> Learn about our farm practices</div>
+        <div class="perk"><span>📍</span> Check availability in your area</div>
+        <div class="perk"><span>🤝</span> Bulk &amp; wholesale enquiries welcome</div>
+      </div>
+
+      <div class="contact-direct">
+        <a href="tel:+919528043430"          class="contact-link">📞 +91 98765 43210</a>
+        <a href="mailto:info@jkpoultries.in" class="contact-link">✉️ info@jkpoultries.in</a>
+        <a href="https://wa.me/919528043430" class="contact-link wa">💬 Chat on WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Right: enquiry form -->
+    <div class="order-form-wrap" id="orderFormWrap">
+      <form class="order-form" id="enquiryForm" novalidate>
+        <h3 class="form-title">Send an Enquiry</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ename">Full Name *</label>
+            <input type="text" id="ename" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label for="ephone">Phone *</label>
+            <input type="tel" id="ephone" name="phone" placeholder="+91 XXXXX XXXXX" required/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="eemail">Email</label>
+          <input type="email" id="eemail" name="email" placeholder="you@example.com"/>
+        </div>
+
+        <div class="form-group">
+          <label for="ecity">Your City / Area *</label>
+          <input type="text" id="ecity" name="city" placeholder="e.g. Vijayawada, Hyderabad" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="eproduct">Interested In</label>
+          <select id="eproduct" name="product">
+            <option value="">Select egg type (optional)</option>
+            <option value="white">Classic White Eggs</option>
+            <option value="brown">Heritage Brown Eggs</option>
+            <option value="desi">Desi Country Eggs</option>
+            <option value="jumbo">Jumbo Double Yolk Eggs</option>
+            <option value="bulk">Bulk / Wholesale</option>
+            <option value="other">General Enquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="emessage">Your Message *</label>
+          <textarea id="emessage" name="message" rows="4"
+            placeholder="Tell us what you'd like to know — availability, pricing, farm visits, wholesale rates, etc."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit-btn" id="enquirySubmitBtn">
+          <span class="btn-text">Send Enquiry</span>
+          <span class="btn-loader" style="display:none">⏳ Sending...</span>
+        </button>
+
+        <div class="form-success" id="enquirySuccess" style="display:none">
+          <span>✅</span>
+          <strong>Enquiry Received!</strong>
+          <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
+        <div class="form-error" id="enquiryError" style="display:none">
+          ⚠️ Something went wrong. Please call or WhatsApp us directly.
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="fb-logo">
+         
+        <span>JK Poultries</span>
+      </div>
+      <p>Farm-fresh eggs delivered with love since 1998. Happy hens. Golden yolks. Your family's health, our mission.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#about">Our Farm</a></li>
+        <li><a href="#eggs">Our Eggs</a></li>
+        <li><a href="#quality">Quality</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#enquire">Enquire Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="#enquire">Classic White</a></li>
+        <li><a href="#enquire">Heritage Brown</a></li>
+        <li><a href="#enquire">Desi Country Egg</a></li>
+        <li><a href="#enquire">Jumbo Double Yolk</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>📍 JK Egg store , 6b beripura , delhi road <br/>Meerut, UP 250002 </li>
+        <li>📞 +91 95280 43430</li>
+        <li>🕐 Mon–Sat: 6am – 6pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 JK Poultries. All rights reserved. | FSSAI Lic No. 1234567890 | Made with 💛 in Uttar Pradesh</p>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
